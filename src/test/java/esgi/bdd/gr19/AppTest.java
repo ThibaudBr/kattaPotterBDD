@@ -2,15 +2,14 @@ package esgi.bdd.gr19;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
-import static org.junit.Assert.assertTrue;
 
+import io.cucumber.java.Before;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.assertj.core.api.Assertions;
-import org.junit.Assert;
-import org.junit.Test;
+
 
 import java.util.ArrayList;
 
@@ -19,10 +18,18 @@ import java.util.ArrayList;
  */
 public class AppTest 
 {
-
+    ArrayList<Book> allBook = new ArrayList<>();
     ArrayList<Book> listBook = new ArrayList<>();
     double priceList = 0.0;
 
+    @Before
+    public void init(){
+        allBook.add(new Book(1));
+        allBook.add(new Book(2));
+        allBook.add(new Book(3));
+        allBook.add(new Book(4));
+        allBook.add(new Book(5));
+    }
 
     @ParameterType("numberBook")
     public int numberBook(String numberBook){
@@ -44,7 +51,7 @@ public class AppTest
     @Given("{int} livre de type {int}")
     public void LivreDeType(int numberBook, int typeOfBook) {
         for(int i =0;i<numberBook;i++){
-            listBook.add(new Book(typeOfBook));
+            listBook.add(allBook.get(typeOfBook-1));
         }
     }
 
@@ -56,6 +63,5 @@ public class AppTest
     @Then("la liste doit nous couter {double} euros")
     public void laListeDoitNousCouterEuros(double price) {
         Assertions.assertThat(priceList).isEqualTo(price);
-        //assert price == priceList : "Not Valid" ;
     }
 }

@@ -86,4 +86,4 @@ Feature: Acheter une liste de livre
     Given 5 livre de type 4
     Given 4 livre de type 5
     When On achete la liste de livre
-    Then la liste doit nous couter 141.2 euros
+    Then la liste doit nous couter 141.6 euros
