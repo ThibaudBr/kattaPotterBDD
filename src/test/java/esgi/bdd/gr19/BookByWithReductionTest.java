@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class BookByWithReductionTest
 {
     ArrayList<Book> allBook = new ArrayList<>();
     ArrayList<Book> listBook = new ArrayList<>();
