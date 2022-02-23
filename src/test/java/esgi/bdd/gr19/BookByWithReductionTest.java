@@ -12,23 +12,24 @@ import org.assertj.core.api.Assertions;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Unit test for simple App.
  */
 public class BookByWithReductionTest
 {
-    ArrayList<Book> allBook = new ArrayList<>();
+    HashMap<String, Book> allBook = new HashMap<String, Book>();
     ArrayList<Book> listBook = new ArrayList<>();
     double priceList = 0.0;
 
     @Before
     public void init(){
-        allBook.add(new Book(1));
-        allBook.add(new Book(2));
-        allBook.add(new Book(3));
-        allBook.add(new Book(4));
-        allBook.add(new Book(5));
+        allBook.put("Harry_potter", new Book(1));
+        allBook.put("Guerre_et_paix", new Book(2));
+        allBook.put("Narnia", new Book(3));
+        allBook.put("Seigneur_des_anneaux", new Book(4));
+        allBook.put("BDD_pour_les_nuls", new Book(5));
     }
 
     @ParameterType("numberBook")
@@ -37,9 +38,9 @@ public class BookByWithReductionTest
     }
 
 
-    @ParameterType("typeOfBook")
-    public int typeOfBook(String typeOfBook){
-        return parseInt(typeOfBook);
+    @ParameterType(".*")
+    public String typeOfBook(String typeOfBook){
+        return typeOfBook;
     }
 
     @ParameterType("price")
@@ -48,10 +49,10 @@ public class BookByWithReductionTest
     }
 
 
-    @Given("{int} livre de type {int}")
-    public void LivreDeType(int numberBook, int typeOfBook) {
+    @Given("{int} livre de type {typeOfBook}")
+    public void livredetype(int numberBook,  String typeOfBook) {
         for(int i =0;i<numberBook;i++){
-            listBook.add(allBook.get(typeOfBook-1));
+            listBook.add(allBook.get(typeOfBook));
         }
     }
 
@@ -64,4 +65,6 @@ public class BookByWithReductionTest
     public void laListeDoitNousCouterEuros(double price) {
         Assertions.assertThat(priceList).isEqualTo(price);
     }
+
+
 }
